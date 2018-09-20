@@ -34,6 +34,7 @@ def opbs(image_data, sel_band_count, removed_bands=None):
     sel_bands = np.array([np.argmax(data_var)])
     last_sel_band = sel_bands[0]
     current_selected_count = 1
+    sum_info = h[last_sel_band]
     while current_selected_count < sel_band_count:
         for t in range(bands):
             if not (t in sel_bands):
@@ -48,11 +49,14 @@ def opbs(image_data, sel_band_count, removed_bands=None):
                     max_h = h[t]
                     new_sel_band = t
         sel_bands = np.append(sel_bands, new_sel_band)
-        print(max_h)
+        last_sel_band = new_sel_band
+        sum_info += max_h
+        estimate_percent = sum_info / (sum_info + (bands - sel_bands.shape[0]) * max_h)
+        print(estimate_percent)
         current_selected_count += 1
 
-    print(sel_bands + 1)
     print(band_idx_map[sel_bands] + 1)
+    print(np.sort(band_idx_map[sel_bands] + 1))
 
     return sel_bands
 

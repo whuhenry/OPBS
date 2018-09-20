@@ -59,8 +59,8 @@ def mev_sfs(data: np.ndarray, sel_band_count, removed_bands=None):
         sel_bands = np.append(sel_bands, new_sel_band)
         current_selected_count += 1
 
-    print(sel_bands)
     print(band_idx_map[sel_bands] + 1)
+    print(np.sort(band_idx_map[sel_bands] + 1))
 
 
 def main():
@@ -70,7 +70,7 @@ def main():
                     157, 158, 159, 160, 161, 162, 163, 164, 216, 217, 218,
                     219]
 
-    use_mat_data = True
+    use_mat_data = False
 
     if use_mat_data:
         mat_dict = scio.loadmat(r"F:\Data\Benchmark\Hyperspec\Indian_pines.mat")
